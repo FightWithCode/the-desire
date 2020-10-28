@@ -106,7 +106,7 @@ class Slide(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=255)
     description = models.TextField()
     image = models.ImageField()
     is_active = models.BooleanField(default=True)
@@ -133,7 +133,7 @@ class Item(models.Model):
     discount_price = models.FloatField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     label = models.CharField(choices=LABEL_CHOICES, max_length=50)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=255)
     stock_no = models.CharField(max_length=10)
     description_short =  HTMLField(blank=True,verbose_name="Product Description")
     # description_long = models.TextField()

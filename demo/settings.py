@@ -8,7 +8,7 @@ SECRET_KEY = '*-ic6#cy_n1ajb8m09%2!kaiqx!4cj%s_@ff1fq+47jw12*-wx'
 
 
 # SECRET_KEY = os.environment.get('SECRET_KEY')
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -72,9 +72,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, 'db.sqlite3')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'thedesiredb',
+        'USER': 'thedesire',
+        'PASSWORD': 'Pragati@2021', 
+        'HOST': '127.0.0.1', #'/cloudsql/the-desire-293907:asia-south1:the-desire',
+        'PORT': '3306',
     }
 }
 
