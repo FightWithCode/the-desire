@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Desire | Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+</head>
+<body>
+    <div class="container" id="container1"></div>
+    <form method="POST">
+        {% csrf_token %}
+        <center><p>Select Ending Date: <input type="text" name="date" id="datepicker"></p>
+        <input type="submit" name="show" id="show" value="Show"></center>
+    </form>
+    <div class="container" id="container2"></div>
+    <div class="container" id="container3"></div>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script>
+        $( function() {
+          $( "#datepicker" ).datepicker();
+        } );
+    </script>
+    <script>
+    Highcharts.chart('container1', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Day by Day Earning'
+        },
+        xAxis: {
+            categories: [
+                {% for entry in day_dataset %}'{{ entry.day.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+            ]
+        },
+        series: [{
+            name: 'Earning',
+            data: [
+                {% for entry in day_dataset %}{{ entry.sum }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            ],
+            color: 'green'
+        }]
+    });
+    Highcharts.chart('container2', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Weekly Earning'
+        },
+        xAxis: {
+            categories: [
+                {% for entry in week_dataset %}'Week {{ entry.week_num }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+            ]
+        },
+        series: [{
+            name: 'Earning',
+            data: [
+                {% for entry in week_dataset %}{{ entry.sum }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            ],
+            color: 'green'
+        }]
+    });
+    Highcharts.chart('container3', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Monthly Earnings'
+        },
+        xAxis: {
+            categories: [
+                {% for entry in month_dataset %}'{{ entry.month }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+            ]
+        },
+        series: [{
+            name: 'Earning',
+            data: [
+                {% for entry in month_dataset %}{{ entry.sum }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            ],
+            color: 'green'
+        }]
+    });
+    </script>
+</body>
+</html>

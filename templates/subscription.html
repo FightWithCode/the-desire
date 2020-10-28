@@ -1,0 +1,462 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>The Desire || Subscription</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+        
+   <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/serviceproduct.css' %}">
+<link rel="stylesheet" href="{% static 'css/ECART.css' %}">
+<style type="text/css">
+  
+
+  html, body{
+    overflow-x: hidden;
+  }
+
+  svg{
+        background-color: white;
+    border: 1px solid;
+    border-radius: 50%;
+    color: white;
+  }
+  .close.is-hidden{
+    display: block;
+  }
+  .close{
+    display: none;
+  }
+
+  .ed{
+    max-width: 40%;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-decoration: none;
+  }
+
+  .ed.delete{
+    border: 1px solid red;
+    color: red;
+    margin-left: 15px;
+  }
+
+  .ed.edit{
+    border: 1px solid blue;
+    color: blue;
+    margin-left: 40px;
+  }
+
+  .yes{
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 15px;
+  }
+  .yes:hover, .no:hover{
+    color: white;
+  }
+  .no{
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 15px;
+  }
+  @media only screen and (max-width: 590px){
+      .brand {
+          top: -12px;
+          width: 150px;
+          height: auto;
+          margin-left: -65px;
+      }
+}
+
+
+</style>
+
+</head>
+<body>
+
+<header>
+        <!-- navigation starts -->
+        <nav class="navigation">
+            <div class="nav-container inner flex">
+                <div class="logo-box">
+                    <img src="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png" alt="logo" class="logo">
+                </div>
+                <div class="menu-box">
+                    <ul class="menu flex">
+                        <li><a href={% url "shop:profile" %}>Profile</a></li>
+                        <li class="login-dropdown"><a href="#"}>Products</a>
+                            <ul class="sub-login">
+                                <li><a href={% url "shop:addproduct" %}>Add Product</a></li>
+                        <li><a href={% url "shop:serviceproduct" %}>My Products</a></li>
+                            </ul>
+                        </li>
+                        
+                         <li><a href={% url "shop:ordersreceived" %} style="position: relative;
+                          padding: 10px 10px;">Orders Received<span style=" position: absolute;
+  top: -10px;right: -10px;padding: 5px 5px;border-radius: 50%;font-size: 15px;background: red;
+  color: white;">{{no_orders}}</span></a></li>
+                        <!-- <li><a href="subscription.html">Subscription</a></li> -->
+                        <li><a href={% url "shop:logout" %}>Logout</a></li>
+                    </ul>
+                </div>
+
+                <div class="mobile-nav">
+                    <div class="toggle-box">
+                        <button class="fa fa-bars toggle icon"></button>
+                    </div>
+                    <div class="brand-box">
+                        <a class="brand"><img src="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png" alt="logo" class="brand"></a>
+                    </div>
+                    <!-- <div class="cart-box">
+                        <a href="ECART.html" class="cart-icon"><i class="fal fa-cart-plus"></i></a>
+                    </div> -->
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <!-- /// header ends //// -->
+
+    <div class="new-menu-box" style="width: 100%;">
+        <ul class="new-menu" style="margin-left: -20px;">
+            <li><a href={% url "shop:profile" %}>Profile</a></li>
+          <li class="new-login-dropdown"><a href="#">Products<span class="fa fa-angle-down l-u-aero"></span>
+                    <span class="fa fa-angle-up l-d-aero"></span></a></a></li>
+            <ul class="new-sub-login">
+                <li><a href={% url "shop:addproduct" %}>Add Product</a></li>
+                <li><a href={% url "shop:serviceproduct" %}>My Products</a></li>
+            </ul>
+            <li><a href={% url "shop:ordersreceived" %}>Orders Received</a> </li>
+                     <!--    <li><a href="subscription.html">Subscription</a></li> -->
+                        <li><a href={% url "shop:logout" %}>Logout</a></li>
+        </ul>
+        <span class="fa fa-times close" style="color: white;opacity: 1;font-size: 1.7rem;"></span>
+    </div>
+
+<section style="height: 80px;width: 100%;background-color: #100f15;display: flex;justify-content: center;text-align: center;text-align: center;">
+  <h4 style="text-align: center;color: white;margin-top: 20px;">Subscription Plan</h4>
+</section>
+{% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == "error" %}
+                      <div class="alert alert-danger alert-dismissible mx-auto" role="alert">
+                    {% else %}
+                      <div class=" alert alert-{{message.tags}} alert-dismissible mx-auto" role="alert">
+                    {% endif %}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="display: inherit;">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <center>
+                      {{ message }}
+                    </center>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+{% if mySubs %}
+<div style="margin-top: 50px;margin-bottom: 110px;">
+      <div class="price-plan-wrapper">
+                    <div class="row">
+                      <div class="col-lg-1 col-md-6"></div>
+ {% for subscription in subscriptions %}
+
+                        {% if subscription.is_booster == False %}
+                        <div class="col-lg-2  col-md-6 ">
+                            <div class="pricing-table-8">
+                                <div class="price-header">
+                                   {% if subscription.has_priority_support %}
+                                    <h4 class="title" style="background: #FE4A55;">{{subscription.name}}</h4>
+                                    {% else %}
+                                    <h4 class="title">{{subscription.name}}</h4>
+                                    {% endif %}
+                                    <div class="price">
+                                        <span class="dollar">Rs. </span><span style="font-size: 25px;">{{subscription.price}}</span><span class="month">/{{subscription.validity}} days</span>
+                                    </div>
+                                </div>
+                                <div class="price-body">
+                                    <ul>
+                                        <li>Validity <b>For {{subscription.validity}} days</b></li>
+                                        <li>Upto<b> {{subscription.entries}} Entries</b></li>
+                                        {% if subscription.has_priority_support %}
+
+                                         <li><b>Priority Customer Service</b></li>
+                                         {% else %}
+                                         <br>
+                                         {% endif %}
+                                       
+                                    </ul>
+                                </div>
+                                <div class="price-footer">
+                                    {% if subscription.id == mySubs.id %}
+                                     <a style="background-color: black;" class="order-btn" >Your Plan</a>
+                                    {% else %}
+                                    <a class="order-btn" href={% url "shop:buySubcription" subscription.id %}>Buy Now</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if myBoost %}
+<div class="col-lg-1" style="display: flex;align-items: center;text-align: center;justify-content: center;">
+  <i style="color: black;font-size: 50px;" class="fa fa-plus"></i>
+</div>
+
+<div class="col-lg-3  col-md-6 ">
+                            <div class="pricing-table-8">
+                                <div class="price-header">
+                                    {% if myBoost.has_priority_support %}
+                                    <h3 class="title" style="background: #FE4A55;">{{myBoost.name}}</h3>
+                                    {% else %}
+                                    <h3 class="title">{{myBoost.name}}</h3>
+                                    {% endif %}
+                                    <div class="price">
+                                                <span class="dollar">Rs. </span><span style="font-size: 25px;">{{myBoost.price}}</span><span class="month">/{{myBoost.validity}} days</span>
+                                    </div>
+                                </div>
+                                <div class="price-body">
+                                    <ul>
+                                        <li>Validity <b>For {{myBoost.validity}} days</b></li>
+                                        <li>Upto<b> {{myBoost.entries}} Entries</b></li>
+                                        {% if myBoost.has_priority_support %}
+
+                                         <li><b>Priority Customer Service</b></li>
+                                         {% endif %}
+                                        
+                                    </ul>
+                                </div>
+                                <div class="price-footer">
+                                    <a class="order-btn" href="#">Your Plan</a>
+
+                                </div>
+                            </div>
+                        </div>
+
+{% else %}
+{% if has_booster %}
+                        <div class="col-lg-1" style="display: flex;align-items: center;text-align: center;justify-content: center;">
+                          <i style="color: black;font-size: 50px;" class="fa fa-plus"></i>
+                        </div>
+                        {% for subscription in subscriptions %}
+
+                        {% if subscription.is_booster == True %}
+                        <div class="col-lg-3  col-md-6 ">
+                            <div class="pricing-table-8">
+                                <div class="price-header">
+                                    {% if subscription.has_priority_support %}
+                                    <h3 class="title" style="background: #FE4A55;">{{subscription.name}}</h3>
+                                    {% else %}
+                                    <h3 class="title">{{subscription.name}}</h3>
+                                    {% endif %}
+                                    <div class="price">
+                                                <span class="dollar">Rs. </span><span style="font-size: 25px;">{{subscription.price}}</span><span class="month">/{{subscription.validity}} days</span>
+                                    </div>
+                                </div>
+                                <div class="price-body">
+                                    <ul>
+                                        <li>Validity <b>For {{subscription.validity}} days</b></li>
+                                        <li>Upto<b> {{subscription.entries}} Entries</b></li>
+                                        {% if subscription.has_priority_support %}
+
+                                         <li><b>Priority Customer Service</b></li>
+                                         {% endif %}
+                                        <!-- <li><b>1x</b> Dashboard Access</li>
+                                        <li><b>3x</b> Job Listings</li> -->
+                                    </ul>
+                                </div>
+                                <div class="price-footer">
+                                    <a class="order-btn" href={% url "shop:buySubcription" subscription.id %}>Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+
+{% endif %}
+                    </div>
+                </div>
+            </div> 
+
+
+
+{% elif buying %}
+ <div style="margin-top: 50px;margin-bottom: 110px;">
+      <div class="price-plan-wrapper">
+                    <div class="row">
+                      <div class="col-lg-1 col-md-6"></div>
+                        <div class="col-lg-2  col-md-6 ">
+                            <div class="pricing-table-8">
+                                <div class="price-header">
+                                   {% if subs.has_priority_support %}
+                                    <h4 class="title" style="background: #FE4A55;">{{subs.name}}</h4>
+                                    {% else %}
+                                    <h4 class="title">{{subs.name}}</h4>
+                                    {% endif %}
+                                    <div class="price">
+                                        <span class="dollar">Rs. </span><span style="font-size: 25px;">{{subs.price}}</span><span class="month">/{{subs.validity}} days</span>
+                                    </div>
+                                </div>
+                                <div class="price-body">
+                                    <ul>
+                                        <li>Validity <b>For {{subs.validity}} days</b></li>
+                                        <li>Upto<b> {{subs.entries}} Entries</b></li><br>
+                                        {% if subs.has_priority_support %}
+
+                                         <li><b>Priority Customer Service</b></li>
+                                         {% endif %}
+                                        <!-- <li><b>Unlimited</b> Security Service</li>
+                                        <li><b>1x</b> Dashboard Access</li>
+                                        <li><b>3x</b> Job Listings</li> -->
+                                    </ul>
+                                </div>
+                                <div class="price-footer">
+                                    <!-- <a class="order-btn" href=" ">Buy Now</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if order_id %}
+                    <form action={% url 'core:subcription_payment_status' subs.id %} method="POST">
+                                    {% csrf_token %}
+                    <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                   data-key="rzp_live_CTaxuOIXPNaSs3"
+                                   data-amount="{{ price }}"
+                                   data-currency="INR"
+                                   data-order_id="{{ order_id }}"
+                                   data-buttontext="Pay with Razorpay"
+                                   data-name="The Desire"
+                                   data-description="Online Payment"
+                                   data-image="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png"
+                                   data-prefill.name="{{ name }}"
+                                   data-prefill.email="{{ email }}"
+                                   data-prefill.contact="{{ phone }}"
+                                   data-theme.color="#fe4a55"></script>
+                    <input type="hidden" custom="Hidden Element" name="hidden">
+                    </form>
+                    {% else %}
+                    <div class="row">
+                        <div class="col-lg-1 col-md-6"></div>
+                        <form action={% url "shop:buySubcription" subs.id %} method="POST" >
+                            {% csrf_token %}
+                        <div class="form-group col-lg-2  col-md-6 " style="text-align: left;">
+                
+     <label for="name" style="font-size: 20px;font-weight: bold;float: left;">Payment GateWays:</label> <br><br>
+   <!--  <input type="radio" id="male" name="payment_option" value="InstaMojo"> -->
+  <!-- <label for="male">InstaMojo</label><br> -->
+  <input type="radio" id="female" name="payment_option" value="RazorPay">
+  <label for="female">Online(Debit/Credit Cards, All Wallets, BHIM UPI)</label><br>
+                        </div>
+                         <button type="submit"> Buy Now</button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div> 
+{% else %}
+ <div style="margin-top: 50px;margin-bottom: 110px;">
+      <div class="price-plan-wrapper">
+                    <div class="row">
+                      <div class="col-lg-1 col-md-6"></div>
+                      {% for subscription in subscriptions %}
+
+                        {% if subscription.is_booster == False %}
+                        <div class="col-lg-2  col-md-6 ">
+                            <div class="pricing-table-8">
+                                <div class="price-header">
+                                   {% if subscription.has_priority_support %}
+                                    <h4 class="title" style="background: #FE4A55;">{{subscription.name}}</h4>
+                                    {% else %}
+                                    <h4 class="title">{{subscription.name}}</h4>
+                                    {% endif %}
+                                    <div class="price">
+                                        <span class="dollar">Rs. </span><span style="font-size: 25px;">{{subscription.price}}</span><span class="month">/{{subscription.validity}} days</span>
+                                    </div>
+                                </div>
+                                <div class="price-body">
+                                    <ul>
+                                        <li>Validity <b>For {{subscription.validity}} days</b></li>
+                                        <li>Upto<b> {{subscription.entries}} Entries</b></li>
+                                        {% if subscription.has_priority_support %}
+
+                                         <li><b>Priority Customer Service</b></li>
+                                         {% else %}
+                                       
+                                        <br>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                <div class="price-footer">
+                                    <a class="order-btn" href={% url "shop:buySubcription" subscription.id %}>Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        
+                        {% if has_booster %}
+                        <div class="col-lg-1" style="display: flex;align-items: center;text-align: center;justify-content: center;">
+                          <i style="color: black;font-size: 50px;" class="fa fa-plus"></i>
+                        </div>
+                        {% for subscription in subscriptions %}
+
+                        {% if subscription.is_booster == True %}
+                        <div class="col-lg-3  col-md-6 ">
+                            <div class="pricing-table-8">
+                                <div class="price-header">
+                                    {% if subscription.has_priority_support %}
+                                    <h3 class="title" style="background: #FE4A55;">{{subscription.name}}</h3>
+                                    {% else %}
+                                    <h3 class="title">{{subscription.name}}</h3>
+                                    {% endif %}
+                                    <div class="price">
+                                                <span class="dollar">Rs. </span><span style="font-size: 25px;">{{subscription.price}}</span><span class="month">/{{subscription.validity}} days</span>
+                                    </div>
+                                </div>
+                                <div class="price-body">
+                                    <ul>
+                                        <li>Validity <b>For {{subscription.validity}} days</b></li>
+                                        <li>Upto<b> {{subscription.entries}} Entries</b></li>
+                                        {% if subscription.has_priority_support %}
+
+                                         <li><b>Priority Customer Service</b></li>
+                                         {% endif %}
+                                        <!-- <li><b>1x</b> Dashboard Access</li>
+                                        <li><b>3x</b> Job Listings</li> -->
+                                    </ul>
+                                </div>
+                                <div class="price-footer">
+                                    <a class="order-btn" href={% url "shop:buySubcription" subscription.id %}>Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                   </div>
+  </div>
+{% endif %}
+{% include 'footer.html' %}
+
+</body>
+</html>

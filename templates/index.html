@@ -1,0 +1,517 @@
+{% load static %}
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>The Desire || Home </title>
+  {% for seo in seos %}
+  <meta name="description" content="{{seo.description}}">
+  {% endfor %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/ECART.css' %}">
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/slide.css' %}">
+
+ <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:300i|Work+Sans:500'>
+<link rel="stylesheet" href="{% static 'css/loader.css' %}">
+
+
+    <link href='https://fonts.googleapis.com/css?family=Satisfy|Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/banner.css' %}">
+
+<style type="text/css">
+/* center the blockquote in the page */
+.blockquote-wrapper {
+/*   display: flex;
+   height: 100vh;*/
+   padding: 0 20px;
+   margin-top: 50px;
+   margin-left: 10px;
+   background-color: #0d010175;
+    border-radius: 30px;
+}
+
+/*@media all and (min-width: 1300px) {
+  .blockquote-wrapper {
+   padding: 0 20px;
+   margin-top: 100px;
+   padding-top: 50px;
+   margin-left: -700px;
+}
+}
+@media all and (min-width: 1200px) {
+  .blockquote-wrapper {
+   padding: 0 20px;
+   margin-top: 100px;
+   padding-top: 50px;
+   margin-left: -700px;
+}
+}*/
+
+/* Blockquote main style */
+.blockquote {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: #fe4a55;
+    padding: 30px 0;
+    width: 100%;
+    max-width: 400px;
+    z-index: 1;
+    margin: 80px auto;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+}
+
+/* Blockquote header */
+.blockquote h1 {
+    position: relative;
+    color: #fe4a55;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+}
+
+/* Blockquote right double quotes */
+.blockquote:after {
+    position: absolute;
+    content: "”";
+    color: #fe4a55;
+    font-size: 10rem;
+    line-height: 0;
+    bottom: -43px;
+    right: 30px;
+}
+
+/* increase header size after 600px */
+@media all and (min-width: 600px) {
+    .blockquote h1 {
+        font-size: 60px;
+   }
+
+}
+
+/* Blockquote subheader */
+.blockquote h4 {
+    position: relative;
+    color: #fe4a55;
+    font-size: 1.4rem;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    padding-top: 20px;
+    z-index: 1;
+}
+
+.preload-finish{
+            opacity: 0;
+            pointer-events: none;
+        }
+
+.preload{
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+            /*transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-delay: 5s;*/
+            z-index: 9999;
+        }
+
+         svg{
+        background-color: white;
+    border: 1px solid;
+    border-radius: 50%;
+    color: white;
+  }
+  .close.is-hidden{
+    display: block;
+  }
+  .close{
+    display: none;
+  }
+  html, body{
+    overflow-x: hidden;
+  }
+  .nav-container a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-box{
+    width: 85%;
+    margin-top: 10px;
+    padding-left: 80px;
+}
+
+.logo-box{
+    width: 15%;
+    height: 70px;
+    position: relative;
+}
+
+@media only screen and (max-width:777px){
+    .brand{
+        width: 100%;
+        top: -17px;
+        left: -40%;
+    }
+}
+
+@media only screen and (max-width:590px){
+    .brand{
+        top: -12px;
+    width: 150px;
+    height: auto;
+    margin-left: -10px;
+}
+}
+
+
+.menu-box {
+    width: 85%;
+    margin-top: 10px;
+    padding-right: 100px;
+}
+  
+.logo-box {
+    padding-left: 100px;
+}
+
+
+</style>
+</head>
+<body>
+
+<div style="background-color: black;" class="preload">
+
+    <div class="mycanvas">
+    <div class="moon">
+            <div class="crater c1"></div>
+            <div class="crater c2"></div>
+            <div class="crater c3"></div>
+            <div class="crater c4"></div>
+            <div class="crater c5"></div>
+            <div class="shadow"></div>
+            <div class="eye el"></div>
+            <div class="eye er"></div>
+            <div class="mouth"></div>
+            <div class="blush b1"></div>
+            <div class="blush b2"></div>
+        </div>
+        <div class="orbit">
+            <div class="rocket">
+                <div class="window"></div>
+            </div>
+        </div>
+  </div>
+  <img style="width: 300px;height: auto;margin-top: 350px;" src="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png">
+  <!-- <div class="details">
+    <a href="https://www.instagram.com/coding.artist" target="_blank">
+      <i class="fa fa-instagram" aria-hidden="true"></i>
+    </a>
+    <a href="https://youtube.com/CodingArtist" target="_blank">
+      <i class="fa fa-youtube-play" aria-hidden="true"></i>
+    </a>
+</div> -->
+
+</div>
+
+<script type="text/javascript">
+    window.addEventListener('load', () => {
+        const preload = document.querySelector('.preload');
+        preload.classList.add("preload-finish");
+    });
+</script>
+
+<!-- partial:index.partial.html -->
+<header>
+        <!-- navigation starts -->
+        <nav class="navigation">
+            <div class="nav-container inner flex">
+                <div class="logo-box">
+                    <img src="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png" alt="logo" class="logo">
+                </div>
+                <div class="menu-box">
+                  {% if request.user|has_group:"Service Providers" %} 
+                     <ul class="menu flex">
+                        <li><a href={% url "shop:profile" %}>Profile</a></li>
+                        <li class="login-dropdown"><a href="#">Products</a>
+                            <ul class="sub-login">
+                                <li><a href={% url "shop:addproduct" %}>Add Product</a></li>
+                        <li><a href={% url "shop:serviceproduct" %}>My Products</a></li>
+                            </ul>
+                        </li>
+                        <li><a href={% url "shop:subscription" %}>Subscription</a></li>
+                        <li><a href={% url "shop:logout" %}>Logout</a></li>
+                     </ul>
+                  {% else %}
+                    <ul class="menu flex">
+                        <li><a href={% url "shop:index"%}>Home</a></li>
+                         {% if user.is_authenticated %}
+                        <li class="category-dropdown"><a href="#">Categories</a>
+                            <ul class="sub-category">
+                              {% for item in category %}
+                                <li><a href={% url "shop:product" item.slug item.id %}>{{item.title}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% else %}
+                         <li class="category-dropdown"><a href="#" onclick="handleLogin()">Categories</a></li>
+                        {% endif %}
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="{% url 'shop:testimonials' %}">Testimonials</a></li>
+                        {% if user.is_authenticated %}
+                          <li><a href="#">Welcome! {{user.first_name}}</a></li>
+                          <li><a href="{% url 'shop:logout' %}">Logout</a></li>
+                          <li><a href="{% url "shop:cart" %}" style="position: relative;
+                          padding: 10px 10px;" >Cart<span style=" position: absolute;
+  top: -10px;right: -10px;padding: 5px 5px;border-radius: 50%;font-size: 15px;background: red;
+  color: white;">{{no_orders}}</span></a></li>
+                        {% else %}
+                        <div style="display: inline-flex;">
+                          <li class="login-dropdown"><a href="#">Login</a>
+                              <ul class="sub-login">
+                                  <li><a href="{% url 'shop:login' %}">Customer</a></li>
+                                  <li><a href="{% url 'shop:service_login_page' %}">Service Provider</a></li>
+                              </ul>
+                          </li>
+                          <li class="register-dropdown"><a href="#">Register</a>
+                              <ul class="sub-register">
+                                  <li><a href="{% url 'shop:registration' %}">Customer</a></li>
+                                  <li><a href="{% url 'shop:registration_sp' %}">Service Provider</a></li>
+                              </ul>
+                          </li>
+                        </div>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="mobile-nav">
+                    <div class="toggle-box">
+                        <button style="font-size: 25px;" class="fa fa-bars toggle icon"></button>
+                    </div>
+                    <div class="brand-box">
+                        <a class="brand"><img src="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png" alt="logo" class="brand"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <!-- /// header ends //// -->
+
+    <div class="new-menu-box" style="width: 100%;">
+      {% if request.user|has_group:"Service Providers" %}
+        <ul class="new-menu" style="margin-left: 20px;">
+
+                     
+                        <li><a href={% url "shop:profile" %}>Profile</a></li>
+                        <li class="new-login-dropdown"><a href="#">Products<span class="fa fa-angle-down l-u-aero"></span>
+                        <ul class="new-sub-login">
+                           
+                                <li><a href={% url "shop:addproduct" %}>Add Product</a></li>
+                        <li><a href={% url "shop:serviceproduct" %}>My Products</a></li>
+                            </ul>
+                        </li>
+                        <li><a href={% url "shop:subscription" %}>Subscription</a></li>
+                        <li><a href={% url "shop:logout" %}>Logout</a></li>
+                     </ul>
+                  {% else %}
+                  <ul class="new-menu" style="margin-left: 20px;">
+                        <!-- <li><a href={% url "shop:index"%}>Home</a></li> -->
+                         {% if user.is_authenticated %}
+                       <li class="new-category-dropdown"><a href="#">Categories<span class="fa fa-angle-down c-u-aero"></span>
+                        <span class="fa fa-angle-up c-d-aero"></span></a></a></li>
+            <ul class="new-sub-category">
+                           
+                              {% for item in category %}
+                                <li><a href={% url "shop:product" item.slug item.id %}>{{item.title}}</a></li>
+                                {% endfor %}
+                            </ul>
+ 
+                        {% else %}
+                        <li class="new-category-dropdown"><a href="#" >Categories<span class="fa fa-angle-down c-u-aero"></span>
+                        <span class="fa fa-angle-up c-d-aero"></span></a></a></li>
+            <ul class="new-sub-category">
+              <li><p style="color: white;"> Login To View the Categories.</p></li>
+            </ul>
+                         {% endif %}
+                        <li><a href="{% url 'shop:testimonials' %}">Testimonials</a></li>
+                        {% if user.is_authenticated %}
+                          <li><a href="#">Welcome! {{user.first_name}}</a></li>
+                          <li><a href="{% url 'shop:logout' %}">Logout</a></li>
+                        {% else %}
+                         <li class="new-login-dropdown"><a href="#">Login<span class="fa fa-angle-down l-u-aero"></span>
+                    <span class="fa fa-angle-up l-d-aero"></span></a></a></li>
+            <ul class="new-sub-login">
+                                  <li><a href="{% url 'shop:login' %}">Customer</a></li>
+                                  <li><a href="{% url 'shop:service_login_page' %}">Service Provider</a></li>
+                              </ul>
+                          </li>
+                          <li class="new-register-dropdown"><a href="#">Register<span class="fa fa-angle-down r-u-aero"></span>
+                    <span class="fa fa-angle-up r-d-aero"></span></a></li>
+            <ul class="new-sub-register">
+                                  <li><a href="{% url 'shop:registration' %}">Customer</a></li>
+                                  <li><a href="{% url 'shop:registration_sp' %}">Service Provider</a></li>
+                              </ul>
+                         
+                    
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+
+           
+        <span class="fa fa-times close" style="color: white;opacity: 1;font-size: 2rem;"></span>
+    </div>
+<!-- <section style="height: 120px;width: 100%;background-color: black;display: flex;justify-content: center;text-align: center;align-items: center;border-bottom: 10px solid #fe4a55;">
+  <h4 style="text-align: center;color: white;margin-top: 20px;">Seasonal / Festival Discount</h4>
+</section> -->
+<!-- Button trigger modal -->
+<!-- Modal -->
+
+
+<div style="display: none;">
+{% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == "error" %}
+                      <div class="alert alert-danger alert-dismissible mx-auto" role="alert">
+                    {% else %}
+                      <div class=" alert alert-{{message.tags}} alert-dismissible mx-auto" role="alert">
+                    {% endif %}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="display: inherit;">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+</div>
+{% for banner in homeImage %}
+<div id="banner">
+            <a href="/">
+                <img src="{{banner.image.url}}" class="image">
+                <!-- <div id="target"></div>
+                <img id="product" src="logo.png"> -->
+                <div class="badge">{{banner.badge_title}}</div>
+                <div class="sale">
+                    <span class="sale-text">{{banner.main_title}}</span><br/>
+                </div>
+            </a>
+        </div>
+{% endfor %}
+<section style="height: 500px;width: 100%;background-image:url(https://raw.githubusercontent.com/Bikassharma2404/vendor/master/10.gif); background-repeat: no-repeat; background-size: cover;float: left;border-bottom: 15px solid #fe4a55;">
+  <div class="container row">
+<div class="blockquote-wrapper col-lg-6 col-sm-12">
+  <div class="blockquote">
+    <h1>
+      Don't dream your life, live your dream
+     </h1>
+    <!-- <h4>&mdash;Steven Pressfield</h4> -->
+  </div>
+</div>
+</div>   
+</section>
+<div class="swiper-container main-slider loading">
+  
+  <div class="swiper-wrapper">
+   <!--  <a href="product.html"> -->
+  {% for item in category %}
+    <div class="swiper-slide">
+      <a href={% url "shop:product" item.slug item.id %}>
+      <figure class="slide-bgimg" style="background-image:url({{item.image.url}})">
+        <img src="{{item.image.url}}" class="entity-img" />
+      </figure>
+
+      <div class="content">
+        <p class="title">{{item.title}}</p>
+        <span class="caption">{{item.description}}</span>
+      </div>
+    </a>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev swiper-button-white"></div>
+  <div class="swiper-button-next swiper-button-white"></div>
+</div>
+
+<!-- Thumbnail navigation -->
+<div class="swiper-container nav-slider loading">
+  <div class="swiper-wrapper" role="navigation">
+    {% for item in category %}
+    <div class="swiper-slide">
+      <figure class="slide-bgimg" style="background-image:url({{item.image.url}})">
+        <img src="{{item.image.url}}" class="entity-img" />
+      </figure>
+      <div class="content">
+        <p class="title">{{item.title}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<section style="background-color: white;">
+  <section style="height: 70px;width: 100%;background-color: #fe4a55;display: flex;justify-content: center;text-align: center;align-items: center;margin-bottom: 20px;">
+  <h4 style="text-align: center;color: white;margin-top: 20px;">About Us</h4>
+</section>
+  <div class="container">
+    <div class="row">
+          
+           <div class="col-12" style="box-shadow: 0px 0px 10px 6px #cecbd2;padding: 60px 20px;" id="about">
+            This is one of the leading and most trusted websites in India. _ understands the importance of choosing the right product/service which will suit the need of the customer, especially in the Indian cultural setup. It believes in providing the most secure and convenient experience to all its customers by ensuring 100% good quality products/services, verified service providers, hassle-free online E-commerce experience. While the online site connects millions of people directly, _ also ensures quick response and offers good interaction with prospective service providers.
+           </div>             
+                    
+    </div>
+  </div>
+</section>
+
+<section style="background-color: white;margin-bottom: 50px;margin-top: 50px;margin-bottom: 150px;" id="contact">
+  <section style="height: 70px;width: 100%;background-color: #fe4a55;display: flex;justify-content: center;text-align: center;align-items: center;margin-bottom: 20px;">
+  <h4 style="text-align: center;color: white;margin-top: 20px;">Contact Us</h4>
+</section>
+  <div class="container">
+    <div class="row">
+           <div class="col-12" style="box-shadow: 0px 0px 10px 6px #cecbd2;padding: 10px 5px;">
+            <b>E-Mail Id:</b> thedesire@gmail.com<br>
+            <b>Location: </b> mumbai
+           </div>             
+                    
+    </div>
+  </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js'></script>
+<script  src="{% static 'slide.js' %}"></script>
+
+<script type="text/javascript">
+  function handleLogin() {
+    alert("Login To View Products");
+  }
+</script>
+</body>
+</html>
