@@ -101,17 +101,20 @@
                 </div>
                 <div class="menu-box">
                     <ul class="menu flex">
-                      <li><a href="{% url "shop:profile" %}">Profile</a></li>
+                        <li><a href={% url "shop:profile" %}>Profile</a></li>
                         <li class="login-dropdown"><a href="#">Products</a>
                             <ul class="sub-login">
-                                <li><a href="{% url "shop:addproduct" %}">Add Product</a></li>
-                        <li><a href="{% url "shop:serviceproduct" %}">My Products</a></li>
+                                <li><a href={% url "shop:addproduct" %}>Add Product</a></li>
+                        <li><a href={% url "shop:serviceproduct" %}>My Products</a></li>
                             </ul>
                         </li>
                         
-                        <li><a href="{% url "shop:ordersreceived" %}">Orders Received</a></li>
-                        <li><a href="{% url "shop:subscription" %}">Subscription</a></li>
-                        <li><a href="{% url "shop:logout" %}">Logout</a></li>
+                         <li><a href={% url "shop:ordersreceived" %} style="position: relative;
+                          padding: 10px 10px;">Orders Received<span style=" position: absolute;
+  top: -10px;right: -10px;padding: 5px 5px;border-radius: 50%;font-size: 15px;background: red;
+  color: white;">{{no_orders}}</span></a></li>
+                        <li><a href={% url "shop:subscription" %}>Subscription</a></li>
+                        <li><a href={% url "shop:logout" %}>Logout</a></li>
                     </ul>
                 </div>
 
@@ -122,9 +125,7 @@
                     <div class="brand-box">
                         <a class="brand"><img src="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png" alt="logo" class="brand"></a>
                     </div>
-                    <!-- <div class="cart-box">
-                        <a href="ECART.html" class="cart-icon"><i class="fal fa-cart-plus"></i></a>
-                    </div> -->
+
                 </div>
             </div>
         </nav>

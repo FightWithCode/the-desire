@@ -197,6 +197,35 @@
     padding-left: 100px;
 }
 
+.badge {
+    box-sizing: border-box;
+    color: #fff;
+    padding: 80px 0 0 0;
+    font-weight: 800;
+    font-family: 'Roboto Slab';
+    font-size: 36px;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    background: #fe4a55;
+    border: solid 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    border-radius: 50%;
+    transform: rotate(345deg);
+    animation: 1s fadein ease-in-out;
+    -webkit-transition-delay: 6s;
+    transition-delay: 6s;
+    position: absolute;
+    opacity: 0;
+    transform: rotate(0deg);
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+    animation: 0.5s rollin ease-in-out 0.5s;
+    animation-fill-mode: forwards;
+}
 
 </style>
 </head>
@@ -278,9 +307,10 @@
                         {% else %}
                          <li class="category-dropdown"><a href="#" onclick="handleLogin()">Categories</a></li>
                         {% endif %}
+                        <li><a href="{% url 'shop:testimonials' %}">Testimonials</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="{% url 'shop:testimonials' %}">Testimonials</a></li>
+                        
                         {% if user.is_authenticated %}
                           <li><a href="#">Welcome! {{user.first_name}}</a></li>
                           <li><a href="{% url 'shop:logout' %}">Logout</a></li>
@@ -355,7 +385,7 @@
                         <li class="new-category-dropdown"><a href="#" >Categories<span class="fa fa-angle-down c-u-aero"></span>
                         <span class="fa fa-angle-up c-d-aero"></span></a></a></li>
             <ul class="new-sub-category">
-              <li><p style="color: white;"> Login To View the Categories.</p></li>
+              <li><p style="color: white;"> Register To View the Categories.</p></li>
             </ul>
                          {% endif %}
                         <li><a href="{% url 'shop:testimonials' %}">Testimonials</a></li>
@@ -446,7 +476,7 @@
 
       <div class="content">
         <p class="title">{{item.title}}</p>
-        <span class="caption">{{item.description}}</span>
+        <span class="caption"><h4>{{item.description}}</h4></span>
       </div>
     </a>
     </div>
@@ -481,22 +511,42 @@
     <div class="row">
           
            <div class="col-12" style="box-shadow: 0px 0px 10px 6px #cecbd2;padding: 60px 20px;" id="about">
-            This is one of the leading and most trusted websites in India. _ understands the importance of choosing the right product/service which will suit the need of the customer, especially in the Indian cultural setup. It believes in providing the most secure and convenient experience to all its customers by ensuring 100% good quality products/services, verified service providers, hassle-free online E-commerce experience. While the online site connects millions of people directly, _ also ensures quick response and offers good interaction with prospective service providers.
+            This is one of the leading and most trusted websites in India. Thedesire.co.in understands the importance of choosing the right product/service which will suit the need of the customer, especially in the Indian cultural setup. It believes in providing the most secure and convenient experience to all its customers by ensuring 100% good quality products/services, verified service providers, hassle-free online E-commerce experience. While the online site connects millions of people directly, thedesire.co.in also ensures quick response and offers good interaction with prospective service providers.
            </div>             
                     
     </div>
   </div>
 </section>
 
-<section style="background-color: white;margin-bottom: 50px;margin-top: 50px;margin-bottom: 150px;" id="contact">
+<section style="background-color: white;margin-bottom: 50px;margin-top: 50px;margin-bottom: 60px;" id="contact">
   <section style="height: 70px;width: 100%;background-color: #fe4a55;display: flex;justify-content: center;text-align: center;align-items: center;margin-bottom: 20px;">
   <h4 style="text-align: center;color: white;margin-top: 20px;">Contact Us</h4>
 </section>
   <div class="container">
     <div class="row">
            <div class="col-12" style="box-shadow: 0px 0px 10px 6px #cecbd2;padding: 10px 5px;">
-            <b>E-Mail Id:</b> thedesire@gmail.com<br>
-            <b>Location: </b> mumbai
+            <b>E-Mail Id:</b> thedezire2021@gmail.com<br>
+            <b>Location: </b> Mumbai
+           </div>             
+                    
+    </div>
+  </div>
+</section>
+
+<section style="background-color: white;margin-bottom: 50px;margin-bottom: 150px;" id="contact">
+  <section style="height: 70px;width: 100%;background-color: #fe4a55;display: flex;justify-content: center;text-align: center;align-items: center;margin-bottom: 20px;">
+  <h4 style="text-align: center;color: white;margin-top: 20px;">Terms and Conditions</h4>
+</section>
+  <div class="container">
+    <div class="row">
+           <div class="col-12" style="box-shadow: 0px 0px 10px 6px #cecbd2;padding: 10px 5px;">
+            <b>Refund Policy:</b> <br>
+            7 days Replacement only.<br> 
+In order to resolve issues with your product, we may troubleshoot your product either                    through online tools, over the phone, and/or through an in-person technical visit.<br>
+
+In certain cases where the seller is unable to process a replacement for any reason whatsoever, a refund will be given upto 80%. <br>
+ 
+During open box deliveries, while accepting your order, if you received a different or a damaged product, you are eligible for refund.
            </div>             
                     
     </div>
@@ -510,7 +560,7 @@
 
 <script type="text/javascript">
   function handleLogin() {
-    alert("Login To View Products");
+    alert("Register To View Products");
   }
 </script>
 </body>

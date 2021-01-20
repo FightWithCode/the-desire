@@ -27,7 +27,15 @@ api = Instamojo(api_key=API_KEY,auth_token=AUTH_TOKEN,endpoint='https://test.ins
 
 import razorpay
 client = razorpay.Client(auth=("rzp_live_CTaxuOIXPNaSs3", "61LaV7pleJg6kUdZQbHiNfkI"))
+#client = razorpay.Client(auth=("rzp_test_0EmBEJ2rejSH8g", "yE0M3thBYEZuyRjvm959d1KG"))
 # client = razorpay.Client(auth=("rzp_test_bjxg6t7DTXax3c", "kqUVmjRxlXpVcrhKG9dxEnMr"))
+
+'''
+    subsdate = 11.11.2020
+    boodate = 11.11.2020
+
+
+'''
 
 
 def is_SubcriptionOver(user):
@@ -38,9 +46,11 @@ def is_SubcriptionOver(user):
             if profile.booster:
                 delta1 = timezone.now() - profile.subs_date
                 delta2 = timezone.now() - profile.booster_date
-                delta = delta1.days - (delta1.days - profile.subcription.validity)
-                delta = delta + delta2.days
-                #print(delta)
+                print(delta1, delta2)
+                # delta = delta1.days - (delta1.days - profile.subcription.validity)
+                # delta = delta + delta2.days
+                delta = delta1.days + delta2.days
+                print(delta)
             elif profile.subcription:
                 delta = timezone.now() - profile.subs_date
                 delta = delta.days
@@ -48,6 +58,7 @@ def is_SubcriptionOver(user):
                 delta = 0
 
             days = profile.days_valid - delta
+            print(profile.days_valid)
             if days <= 0:
                 days = 0
             if days > 0:
@@ -436,11 +447,23 @@ def payment_status(request):
                     item.ordered_date = myTime
                     item.ref_code = response['receipt']
                     item.save()
-            return redirect("shop:index")
+            messages.success(request, "Your Order Has been Placed Successfully")         
+            return redirect("shop:myorders")
         except:
-            return redirect("shop:index")
+            return redirect("shop:checkout")
     else:
         print("out of  post")
+
+
+def boosterdays(profile):
+    if profile.booster:
+        return profile.booster.validity
+        delta2 = timezone.now() - profile.booster_date
+        delta = profile.booster.validity - delta2.days
+        print(delta2.days, delta)
+        return delta
+    return 0
+
 
 def subcription_payment_status(request, id):
     if request.method == "POST":
@@ -483,11 +506,13 @@ def subcription_payment_status(request, id):
                     else:
                         profile.subcription = subscription
                         profile.entries_remaining = subscription.entries
-                        profile.days_valid = subscription.validity
+                        profile.days_valid = subscription.validity + boosterdays(profile)
                         profile.subs_date = timezone.now()
-                        profile.booster_date = None
+                        # profile.booster_date = None
                         profile.save()
+                messages.success(request, "Your Subscription Plan is Activated Successfully")        
                 return redirect("shop:profile")
+                
             else:
                 raise ValueError
         except Exception as e:
@@ -530,7 +555,7 @@ def customer_login_page(request):
                 if user:
                     if is_customer(user):
                         login(request, user)
-                        # messages.success(request, "Logined In as a Customer")
+                        messages.success(request, "Logined In as a Customer")
                         return redirect('shop:index')
                 messages.error(request, "User Id And Password doesn't match.")
                 return redirect("shop:login")
@@ -1110,9 +1135,11 @@ def buySubcription(request, id):
 
 def testimonials_page(request):
     if request.method == 'POST':
-        #print(request.POST)
         name = request.POST['email']
-        role = request.POST['role']
+        try:
+            role = request.POST['role']
+        except:
+            role = 'Seller' 
         testimonial = request.POST['testimonial']
         new_testimonial = Testimonial(
                                 name=name,
@@ -1120,7 +1147,7 @@ def testimonials_page(request):
                                 testimonial=testimonial
                             )
         new_testimonial.save()
-        messages.success(request, 'Thanks for your Testimonial')
+        messages.success(request, 'Thank You for your Testimonial.')
         return redirect("shop:testimonials")
     testimonials = Testimonial.objects.filter(display=True)
     context = {
@@ -1153,8 +1180,8 @@ def updateproduct_page(request, slug, id):
         slug = title.lower()
         brandName = request.POST['brand_name']
         stock_no=request.POST['stock_number']
-        description_short=request.POST['description_short']
-        description_long=request.POST['delivery_details']
+        description_short=request.POST['Product_Description']
+        description_long=request.POST['Shipping_Details']
         state = request.POST['state']
         city = request.POST['city']
         profile = Profile.objects.filter(user=request.user)
@@ -1300,6 +1327,9 @@ def addcomment(request,id):
         if profile.exists():
         	profile = profile[0]
         	pro_id = profile.unique_id
+        else:
+        	messages.error(request, "Admin cannot place a comment")
+        	return HttpResponseRedirect(url)
         item = Item.objects.get(id=id)
         item_id=item.unique_id
         seller_id = item.seller.unique_id
@@ -1322,11 +1352,20 @@ def accept_order(request, id):
     return redirect("shop:ordersreceived")
 
 
-def decline_order(request, id):
-    if is_serviceProvider(request.user):
-        marked = OrderItem.objects.get(id=id)
-        marked.order_rejected = True
-        marked.save()
+def decline_order(request):
+    
+    if request.method == "POST":
+        try:
+            id = request.POST['data']
+            msg = request.POST['msg']
+        except:
+            messages.error(request, "Could not cancel the order. ")
+            return redirect("shop:ordersreceived")
+        if is_serviceProvider(request.user):
+            marked = OrderItem.objects.get(id=id)
+            marked.order_rejected = True
+            marked.seller_msg = msg
+            marked.save()
     return redirect("shop:ordersreceived")
 
 
@@ -1416,7 +1455,8 @@ def payment_graph_view(request):
     )
     new_week_item = []
     week_no = datetime.now().isocalendar()[1]
-    for i in range(1,week_no + 1):
+    start_week = week_no - 26
+    for i in range(start_week, week_no + 1):
         found = False
         for item in week_items:
             if item["week_num"] == i:
@@ -1492,7 +1532,8 @@ def subscription_graph_view(request):
     )
     new_week_item = []
     week_no = datetime.now().isocalendar()[1]
-    for i in range(1,week_no + 1):
+    start_week = week_no - 26
+    for i in range(start_week, week_no + 1):
         found = False
         for item in week_items:
             if item["week_num"] == i:

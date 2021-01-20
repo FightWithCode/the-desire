@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
 </head>
-<body>
+<!-- <body style="background-color: black;"> -->
+    <body>
+    <!-- <img src=""> -->
+    <center>  <img style="width: 300px;height: auto;background-color: #fe4a55;" src="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png"></center>
+    <center><h1> Subscription Payments. </h1></center>
     <div class="container" id="container1"></div>
     <form method="POST">
         {% csrf_token %}
-        <center><p>Select Ending Date: <input type="text" name="date" id="datepicker"></p>
+        <center><p>Select Ending Date: <input type="text" name="date" id="datepicker" required="text"></p>
         <input type="submit" name="show" id="show" value="Show"></center>
     </form>
     <div class="container" id="container2"></div>
@@ -27,10 +31,12 @@
     </script>
     <script>
     Highcharts.chart('container1', {
+        
         chart: {
             type: 'line'
         },
         title: {
+        	// 
             text: 'Day by Day Earning'
         },
         xAxis: {
@@ -63,7 +69,7 @@
             data: [
                 {% for entry in week_dataset %}{{ entry.sum }}{% if not forloop.last %}, {% endif %}{% endfor %}
             ],
-            color: 'green'
+            color: 'red'
         }]
     });
     Highcharts.chart('container3', {
@@ -83,7 +89,7 @@
             data: [
                 {% for entry in month_dataset %}{{ entry.sum }}{% if not forloop.last %}, {% endif %}{% endfor %}
             ],
-            color: 'green'
+            color: 'black'
         }]
     });
     </script>

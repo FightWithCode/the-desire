@@ -145,11 +145,12 @@
                             </ul>
                         </li>
                         <li><a href="{% url "shop:cart" %}" style="position: relative;
-                          padding: 10px 10px;" >Cart<i class="fal fa-cart-plus cart"></i><span style=" position: absolute;
+                          padding: 10px 10px;" >Cart<span style=" position: absolute;
   top: -10px;right: -10px;padding: 5px 5px;border-radius: 50%;font-size: 15px;background: red;
   color: white;">{{no_orders}}</span></a></li>
                     
                         {% if user.is_authenticated %}
+                        <li><a href={% url "shop:myorders" %}>My Orders</a></li>
                           <!-- <li><a href="#">{{user.first_name}}</a></li> -->
                           <li><a href="{% url 'shop:logout' %}">Logout</a></li>
                         {% else %}
@@ -179,8 +180,10 @@
                     <div class="brand-box">
                         <a class="brand"><img src="https://raw.githubusercontent.com/Bikassharma2404/vendor/master/logo.png" alt="logo" class="brand"></a>
                     </div>
-                    <div class="cart-box">
-                        <!-- <a href="cart.html" class="cart-icon"><i class="fal fa-cart-plus"></i></a> -->
+                                    <div class="cart-box">
+                        <a href="/cart" class="cart-icon"><i class="fa fa-cart-plus"><span style=" position: absolute;
+  top: -10px;right: -10px;padding: 5px 5px;border-radius: 50%;font-size: 15px;background: red;
+  color: white;">{{no_orders}}</span></i></a>
                     </div>
                 </div>
             </div>
@@ -200,6 +203,7 @@
               {% endfor %}
             </ul>
             {% if user.is_authenticated %}
+            <li><a href={% url "shop:myorders" %}>My Orders</a></li>
               <!-- <li><a href="#">{{user.first_name}}</a></li> -->
               <li><a href="{% url 'shop:logout' %}">Logout</a></li>
             {% else %}
@@ -338,7 +342,7 @@ for (var i = 0; i < data.length; i++) {
     image = data[i].image;
     has_priority = data[i].priority
     if(has_priority === true){
-      firstProduct += "<div class='col-sm-4 product' data-make='" + make + "' data-model='" + model + "' data-type='" + type + "' data-price='" + rawPrice + "'><div class='product-inner text-center'><span class='badge'>Prior</span><a href='/productpage/"+slug+"/"+id+"'><img src='" + image + "'></a><br /><br />Name: " + model + "<br />Price: " + price + "<br />State: "+ type+"<br />City: " + make + "</div></div>";
+      firstProduct += "<div class='col-sm-4 product' data-make='" + make + "' data-model='" + model + "' data-type='" + type + "' data-price='" + rawPrice + "'><div class='product-inner text-center'><span class='badge'>Featured  Products</span><a href='/productpage/"+slug+"/"+id+"'><img src='" + image + "'></a><br /><br />Name: " + model + "<br />Price: " + price + "<br />State: "+ type+"<br />City: " + make + "</div></div>";
     }
   //create product cards
   else{

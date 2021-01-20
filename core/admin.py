@@ -152,6 +152,9 @@ class OrderItemAdmin(admin.ModelAdmin):
 class SubcriptionAdmin(admin.ModelAdmin):
     ordering = ("-created_at",)
     # Inject chart data on page load in the ChangeList view
+
+class SubscriptionPaymentAdmin(admin.ModelAdmin):
+    readonly_fields = ('user','price','timestamp')
     
 class ProfileAdmin(admin.ModelAdmin):
     # list_filter = ("user.groups", )
@@ -198,7 +201,7 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Comment,CommentAdmin)
 #admin.site.register(Attachment)
 #admin.site.register(Contact)
-admin.site.register(Slide)
+#admin.site.register(Slide)
 admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Payment, PaymentAdmin)
 #admin.site.register(Coupon) 
@@ -208,7 +211,7 @@ admin.site.register(Testimonial)
 admin.site.register(Subcription, SubcriptionAdmin)
 admin.site.register(Seo)
 admin.site.register(HomeImage)
-admin.site.register(SubscriptionPayment)
+admin.site.register(SubscriptionPayment, SubscriptionPaymentAdmin)
 
 
 

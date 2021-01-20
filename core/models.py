@@ -42,6 +42,9 @@ class HomeImage(models.Model):
     def __str__(self):
         return self.main_title + " " + str(self.is_active)
 
+    class Meta:
+        verbose_name_plural = 'Banner'        
+
 class Subcription(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     price = models.FloatField( null=True, blank=True)
@@ -54,6 +57,9 @@ class Subcription(models.Model):
     def __str__(self):
         return self.name + " " +str(self.validity) + " Days"
 
+    class Meta:
+        verbose_name_plural = 'Subscription Plans'
+
 # SubscriptionPayment for Graph
 class SubscriptionPayment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -64,6 +70,8 @@ class SubscriptionPayment(models.Model):
     def __str__(self):
         return self.user.username
 
+    class Meta:
+        verbose_name_plural = 'Subscription Payments'
 
 class Profile(models.Model):
     unique_id = models.CharField(max_length=255, null=True, blank=True,verbose_name="User Id")
@@ -200,7 +208,8 @@ class Item(models.Model):
         print(attachments)
         return attachments
 
-
+    class Meta:
+        verbose_name_plural = 'Products'
 
 
 
@@ -232,6 +241,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.unique_id
+        
+    class Meta:
+        verbose_name_plural = 'Product Comments'        
 
 class CommentForm(ModelForm):
     class Meta:
@@ -316,6 +328,8 @@ class OrderItem(models.Model):
         print(tax_num)
         return tax_num
 
+    class Meta:
+        verbose_name_plural = 'Orders Details'
 
 class BillingAddress(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -351,6 +365,8 @@ class Payment(models.Model):
     def __str__(self):
         return self.user.username
 
+    class Meta:
+        verbose_name_plural = 'Product Payments'
 
 class Coupon(models.Model):
     code = models.CharField(max_length=15)

@@ -145,7 +145,16 @@
                 <li><a href={% url "shop:addproduct" %}>Add Product</a></li>
                 <li><a href={% url "shop:serviceproduct" %}>My Products</a></li>
             </ul>
-            <li><a href={% url "shop:ordersreceived" %}>Orders Received</a> </li>
+            <li><a href={% url "shop:ordersreceived" %}>Orders Received<span style="
+  
+  top: 227px;
+  right: 204px;
+  padding: 5px 5px;
+  border-radius: 112%;
+  font-size: 13px;
+  background: red;
+  color: white;
+  ">{{no_orders}}</span></a> </li>
                      <!--    <li><a href="subscription.html">Subscription</a></li> -->
                         <li><a href={% url "shop:logout" %}>Logout</a></li>
         </ul>
@@ -206,7 +215,7 @@
                                 </div>
                                 <div class="price-footer">
                                     {% if subscription.id == mySubs.id %}
-                                     <a style="background-color: black;" class="order-btn" >Your Plan</a>
+                                     <a style="background-color: black;" class="order-btn" >Active Plan</a>
                                     {% else %}
                                     <a class="order-btn" href={% url "shop:buySubcription" subscription.id %}>Buy Now</a>
                                     {% endif %}
@@ -245,7 +254,7 @@
                                     </ul>
                                 </div>
                                 <div class="price-footer">
-                                    <a class="order-btn" href="#">Your Plan</a>
+                                    <a class="order-btn" style="background-color: black;">Active Plan</a>
 
                                 </div>
                             </div>

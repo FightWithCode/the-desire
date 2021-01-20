@@ -2,7 +2,7 @@ import os
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
-DEBUG = True
+DEBUG = False
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*-ic6#cy_n1ajb8m09%2!kaiqx!4cj%s_@ff1fq+47jw12*-wx'
 
@@ -71,14 +71,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite',
+#         'NAME': '',
+#         # 'USER': 'fightback',
+#         # 'PASSWORD': 'FightBack@2010',
+#         # 'HOST': '127.0.0.1',  # '/cloudsql/the-desire-293907:asia-south1:the-desire',
+#         # 'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'thedesiredb',
-        'USER': 'thedesire',
-        'PASSWORD': 'Pragati@2021', 
-        'HOST': '127.0.0.1', #'/cloudsql/the-desire-293907:asia-south1:the-desire',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
@@ -136,3 +143,8 @@ STRIPE_PUBLIC_KEY = 'pk_test_lX3r6OMjOU2yzFsNSHq6belT00EY82kZmH'
 STRIPE_SECRET_KEY = 'sk_test_tn0CTDaIJHUJyAqhsf39cfsC00LNjsqDnb'
 
 LOGIN_URL = '/login'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'thedesiremedia'
+GS_DEFAULT_ACL = 'publicRead' 
+MEDIA_URL = 'https://storage.googleapis.com/thedesiremedia/'

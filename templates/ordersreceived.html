@@ -18,6 +18,9 @@
 <!--     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&display=swap" rel="stylesheet"> -->
 
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 
@@ -158,6 +161,22 @@ display: block;
 }
 }
 
+
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color:  #4cae4c;
+    border-radius: 10px;
+}
+
       </style>
       
    </head>
@@ -216,7 +235,17 @@ display: block;
                 <li><a href="/addproduct">Add Product</a></li>
                 <li><a href="/serviceproduct">My Products</a></li>
             </ul>
-            <li><a href="/ordersreceived">Orders Received</a></li>
+                      <li><a href={% url "shop:ordersreceived" %}>Orders Received<span style="
+  
+  top: 227px;
+  right: 204px;
+  padding: 5px 5px;
+  border-radius: 112%;
+  font-size: 13px;
+  background: red;
+  color: white;
+  ">{{no_orders}}</span></a> </li>
+
                         <li><a href="/subscription">Subscription</a></li>
                         <li><a href="/logout">Logout</a></li>
         </ul>
@@ -224,7 +253,7 @@ display: block;
     </div>
 
 <section style="height: 80px;width: 100%;background-color: #100f15;display: flex;justify-content: center;text-align: center;text-align: center;">
-  <h4 style="text-align: center;color: white;margin-top: 20px;">Orders Received</h4>
+  <h4 style="text-align: center;color: white;margin-top: 20px; font-size: 27px">Orders Received</h4>
 </section>
 <center>
 
@@ -292,7 +321,7 @@ display: block;
 </div>
 {% if displayInfo %}
 
-<table id="content-table3" class="table-responsive-full sort-table" style="padding:1em;position: relative;margin-bottom: 200px; ">
+<table id="content-table3" class="table-responsive-full sort-table" style="padding:1em;position: relative;margin-bottom: 10px; font-size: 20px; ">
   <thead>
     <tr>
       <th class="title">Order Id
@@ -300,6 +329,8 @@ display: block;
           <a href="javascript:sort(true, 'title', 'content-table3');"><button class="button" title="Αύξουσα ταξινόμηση"><i class="fa fa-chevron-down"></i></button></a>
           <a href="javascript:sort(false, 'title', 'content-table3');"><button class="button" title="Φθίνουσα ταξινόμηση"><i class="fa fa-chevron-up"></i></button></a>
         </div>
+      </th>
+      <th class="title">Order Date & Time
       </th>
       <th class="title">Name
       </th>
@@ -319,43 +350,133 @@ display: block;
       {% for item in orders %}
     <tr>
       <td data-label="Order Id" class="title" class="title">Order Id: {{profile.unique_id}}O{{item.id}}<br>Reference Id: {{item.ref_code}} </td>
-      <td data-label="Customer Details" class="composer"><b>Customer Name:</b><br>{{item.billing_address.fname}}, {{item.billing_address.lname}}<br><b>Contact Details:<br>Mob No: {{item.billing_address.number}}<br>Email-Id: {{item.billing_address.email}}<br>Ordered Before: {{item.ordered_date |timesince}}<br>Ordered Date: {{item.ordered_date |date}}</td>
-      <td data-label="Address" class="lyrics"><b>Apartment Address :</b>{{item.billing_address.apartment_address}}<br><b>Street Address1 :</b>{{item.billing_address.street_address}}<br> {% if item.billing_address.address %}<b>Street Address2 :</b>{{item.billing_address.address}}<br>
-        {% endif %}<b>City :</b>{{item.billing_address.city}}<br><b>State :</b>{{item.billing_address.state}}<br><b>Postal / Zip Code :</b>{{item.billing_address.zip}}</td>
-         <td data-label="Ordered Items" >Item Id:-<b>{{item.item.unique_id}} </b><br>{{item.item.title}},(<b>Qty:</b>{{item.quantity}})<br> <b>Special Requirements: -</b><br>{{item.billing_address.specialInstructions}}</td>
+      <td data-label="Order Date & Time" class="composer"><b>Ordered Date:</b> {{item.ordered_date |date}}<br><b>Ordered Time: </b>{{item.ordered_date |time}}</td>
+      <td data-label="Customer Details" class="composer"><b>Name:</b><br>{{item.billing_address.fname}}, {{item.billing_address.lname}}<br><b>Contact Details:<br>Mob No: {{item.billing_address.number}}<br>Email-Id: {{item.billing_address.email}}</td>
+      <td data-label="Address" class="lyrics"><b>Address 1 :</b>{{item.billing_address.apartment_address}}<br><b>Address 2 :</b>{{item.billing_address.street_address}}<br> {% if item.billing_address.address %}<b>Address 3 :</b>{{item.billing_address.address}}<br>
+        {% endif %}<b>City :</b>{{item.billing_address.city}}<br><b>State :</b>{{item.billing_address.state}}<br><b>Zip Code :</b>{{item.billing_address.zip}}</td>
+         <td data-label="Ordered Items" >Item Id:-<b>{{item.item.unique_id}} </b><br>{{item.item.title}},(<b>Qty:</b>{{item.quantity}})<br> <b>Special Instructions: -</b><br>{{item.billing_address.specialInstructions}}</td>
        <!--  <td data-label="Message"></td> -->
-      <td data-label="Price" class="set"><b>Total Price:</b> Rs.{{item.price}}<br><!-- <b>Tax:</b>Rs.{{item.tax}} --><!-- <br><b>Total Price: Rs.{{item.totalPrice}} --><!-- <br><b>Payment Option:</b><br>Online --></td>
+      <td data-label="Price" class="set"> Rs.{{item.price}}<br><!-- <b>Tax:</b>Rs.{{item.tax}} --><!-- <br><b>Total Price: Rs.{{item.totalPrice}} --><!-- <br><b>Payment Option:</b><br>Online --></td>
       <td data-label="decision" class="set">
         {% if item.order_placed == False %}
         {% if item.order_rejected == False %}
 
-         <a href={% url "core:accept_order" item.id %}><button class="delivered"><i class="fa fa-check" aria-hidden="true">Accept</i></button></a>
+         <!-- <a href={% url "core:accept_order" item.id %}> --><button class="delivered" data-toggle="modal" data-target="#acceptModal1"  onclick="handleAcceptClick(this)"  name="{{item.id}}" ><i class="fa fa-check" aria-hidden="true">Accept</i></button></a>
+
+           <!-- Modal -->
+  <div class="modal fade" id="acceptModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Accept Order</h4>
+        </div>
+        <div class="modal-body">
+          <h2><center>Do you Wish to accept the Order ?</center></h2>
+        </div>
+  
+        <div class="modal-footer">
+        <center>
+        <button type="button" style="color: white;background-color: red;    font-size: 30px;" class="btn btn-default" data-dismiss="modal">No</button>
+          <a id="accept-target-link" href="#"><button type="button" style="color: white;background-color: green;     font-size: 30px;" class="btn btn-default" >Yes</button></a></center>
+        </div>
+       
+
+      </div>
+      
+    </div>
+  </div>
+
 
          {% endif %}
         {% endif %}
         {% if item.being_delivered == False %}
         {% if item.order_placed == True %}
-        <span class="badge btn-success btn-sm" style="font-size:1.0em;">Accepted</span><div></div><br>
+        <span class="badge btn-success btn-sm" style="font-size:1.3em;">Accepted</span><div></div><br>
 
-         <a href={% url "core:delivered_order" item.id %}><button class="delivered"><i class="fa fa-check" aria-hidden="true">Delivered</i></button></a><br>
+         <!-- <a href={% url "core:delivered_order" item.id %}> -->
+          <button class="delivered" data-toggle="modal" data-target="#deliverModal1" onclick="handleDeliverClick(this)"  name="{{item.id}}"><i class="fa fa-check" aria-hidden="true">Delivered</i></button></a><br>
+
+           <!-- Modal -->
+  <div class="modal fade" id="deliverModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Order Delivered</h4>
+        </div>
+        <div class="modal-body">
+          <h2><center>Is the order successfully Delivered to the customer ?</center></h2>
+        </div>
+  
+        <div class="modal-footer">
+        <center>
+        <button type="button" style="color: white;background-color: red;    font-size: 30px;" class="btn btn-default" data-dismiss="modal">No</button>
+          <a id="deliver-target-link" href="#"><button type="button" style="color: white;background-color: green;     font-size: 30px;" class="btn btn-default" >Yes</button></a></center>
+        </div>
+       
+
+      </div>
+      
+    </div>
+  </div>
+
+
         {% endif %}
         {% endif %}
         {% if item.order_rejected == False %}
         {% if item.order_placed == False %}
 
-        <a href={% url "core:decline_order" item.id %}><button class="cancle"><i class="fa fa-times" aria-hidden="true">Cancel</i></button></a>
+       <button class="cancle" data-toggle="modal" data-target="#deleteModal1"  onclick="handleDeleteClick(this)"  name="{{item.id}}" ><i class="fa fa-times" aria-hidden="true">Cancel</i></button></a>
+
+           <!-- Modal -->
+  <div class="modal fade" id="deleteModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Cancel Order.</h4>
+        </div>
+        <div class="modal-body">
+          <h2><center>Do you wish to cancel the order ?</center></h2>
+        </div>
+  
+        <div class="modal-footer">
+        <center>
+        
+       <form action="decline-order/" method="POST">
+          {% csrf_token %}
+          <textarea required="" name="msg" rows="4" cols="25" placeholder="Reason For Cancelling the Order......"></textarea><br>
+          <input id="delete-target-link" style="display: none;"type="text"name="data" value="#"></input>
+          <button type="button" style="color: white;background-color: red;    font-size: 30px;" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="submit" style="color: white;background-color: green;     font-size: 30px;" class="btn btn-default" >Yes</button>
+        </form>
+          </center>
+        </div>
+       
+
+      </div>
+      
+    </div>
+  </div>
 
         {% endif %}
         {% endif %}
-        {% if item.being_delivered == True %}<span class="badge btn-success btn-sm" style="font-size:1.0em;">Completed</span>{% endif %}
-        {% if item.order_rejected == True %} <span class="badge btn-danger btn-lg" style="font-size:1.0em;">Canceled</span>{% endif %}
+        {% if item.being_delivered == True %}<span class="badge btn-success btn-sm" style="font-size:1.3em;">Completed</span>{% endif %}
+        {% if item.order_rejected == True %} <span class="badge btn-danger btn-lg" style="font-size:1.3em;     background-color: red;">Cancelled</span>{% endif %}
       </td>
       <td data-label="Message">
         {% if item.seller_msg %}<p>Your Previous Message: </p><div style="text-align: right; margin-bottom: 10px;"><label class="badge  badge-info">{{item.seller_msg}}</label></div>{% endif %}
         <form action={% url "shop:addmsg" item.id %} method="POST">
           {% csrf_token %}
-          <textarea name="msg" rows="4" cols="10" placeholder="Reason to be entered incase of Late Delivery or Order Cancel..."></textarea><br>
-          <input type="submit" value="Submit">
+          <textarea name="msg" rows="4" cols="15" placeholder="Reason to be entered incase of Late Delivery ..."></textarea><br>
+          <input type="submit" style="background-color: #4cae4c; color: white;" value="Submit">
         </form>
       </td>
     </tr>
@@ -364,8 +485,8 @@ display: block;
   </tbody>
 </table>
 
-<nav aria-label="Page navigation" >
-  <ul class="pagination" style="margin-left: 50%;transform: translate(-50%); color:#FF405E;">
+<nav aria-label="Page navigation" style="margin-bottom:200px;">
+  <ul class="pagination" style="color:#FF405E;">
     {% if orders.has_previous %}
        <li> <a class="page-item pagination-action" href="?page=1" tabindex="-1" id="myTab">
             <i class="fa fa-angle-double-left" aria-hidden="true"></i> </a></li>
@@ -395,7 +516,7 @@ display: block;
 <h2 style="
     margin-top: 100px;
 ">Your Subscription Plan Has Expired. Subscribe Again to View New Orders.</h2>
-<table id="content-table3" class="table-responsive-full sort-table" style="padding:1em;position: relative;margin-bottom: 200px; ">
+<table id="content-table3" class="table-responsive-full sort-table" style="padding:1em;position: relative;margin-bottom: 10px; font-size: 20px; ">
   <thead>
     <tr>
       <th class="title">Order Id
@@ -403,6 +524,8 @@ display: block;
           <a href="javascript:sort(true, 'title', 'content-table3');"><button class="button" title="Αύξουσα ταξινόμηση"><i class="fa fa-chevron-down"></i></button></a>
           <a href="javascript:sort(false, 'title', 'content-table3');"><button class="button" title="Φθίνουσα ταξινόμηση"><i class="fa fa-chevron-up"></i></button></a>
         </div>
+        <th class="title">Order Date & Time
+      </th>
       </th>
       <th class="title">Name
       </th>
@@ -422,43 +545,128 @@ display: block;
       {% for item in orders %}
     <tr>
       <td data-label="Order Id" class="title" class="title">Order Id: {{profile.unique_id}}O{{item.id}}<br>Reference Id: {{item.ref_code}} </td>
-      <td data-label="Customer Details" class="composer"><b>Customer Name:</b><br>{{item.billing_address.fname}}, {{item.billing_address.lname}}<br><b>Contact Details:<br>Mob No: {{item.billing_address.number}}<br>Email-Id: {{item.billing_address.email}}<br>Ordered Before: {{item.ordered_date |timesince}}<br>Ordered Date: {{item.ordered_date |date}}</td>
-      <td data-label="Address" class="lyrics"><b>Apartment Address :</b>{{item.billing_address.apartment_address}}<br><b>Street Address1 :</b>{{item.billing_address.street_address}}<br> {% if item.billing_address.address %}<b>Street Address2 :</b>{{item.billing_address.address}}<br>
-        {% endif %}<b>City :</b>{{item.billing_address.city}}<br><b>State :</b>{{item.billing_address.state}}<br><b>Postal / Zip Code :</b>{{item.billing_address.zip}}</td>
-         <td data-label="Ordered Items" >Item Id:-<b>{{item.item.unique_id}} </b><br>{{item.item.title}},(<b>Qty:</b>{{item.quantity}})<br> <b>Special Requirements: -</b><br>{{item.billing_address.specialInstructions}}</td>
+      <td data-label="Order Date & Time" class="composer"><b>Ordered Date:</b> {{item.ordered_date |date}}<br><b>Ordered Time: </b>{{item.ordered_date |time}}</td>
+      <td data-label="Customer Details" class="composer"><b>Name:</b><br>{{item.billing_address.fname}}, {{item.billing_address.lname}}<br><b>Contact Details:<br>Mob No: {{item.billing_address.number}}<br>Email-Id: {{item.billing_address.email}}</td>
+      <td data-label="Address" class="lyrics"><b>Address 1 :</b>{{item.billing_address.apartment_address}}<br><b>Address 2 :</b>{{item.billing_address.street_address}}<br> {% if item.billing_address.address %}<b>Address 3 :</b>{{item.billing_address.address}}<br>
+        {% endif %}<b>City :</b>{{item.billing_address.city}}<br><b>State :</b>{{item.billing_address.state}}<br><b>Zip Code :</b>{{item.billing_address.zip}}</td>
+         <td data-label="Ordered Items" >Item Id:-<b>{{item.item.unique_id}} </b><br>{{item.item.title}},(<b>Qty:</b>{{item.quantity}})<br> <b>Special Instructions: -</b><br>{{item.billing_address.specialInstructions}}</td>
        <!--  <td data-label="Message"></td> -->
-      <td data-label="Price" class="set"><b>Total Price:</b> Rs.{{item.price}}<br><!-- <b>Tax:</b>Rs.{{item.tax}} --><!-- <br><b>Total Price: Rs.{{item.totalPrice}} --><!-- <br><b>Payment Option:</b><br>Online --></td>
+      <td data-label="Price" class="set">Rs.{{item.price}}<br><!-- <b>Tax:</b>Rs.{{item.tax}} --><!-- <br><b>Total Price: Rs.{{item.totalPrice}} --><!-- <br><b>Payment Option:</b><br>Online --></td>
       <td data-label="Status" class="set">
         {% if item.order_placed == False %}
         {% if item.order_rejected == False %}
 
-         <a href={% url "core:accept_order" item.id %}><button class="delivered"><i class="fa fa-check" aria-hidden="true">Accept</i></button></a>
+         <!-- <a href={% url "core:accept_order" item.id %}> --><button class="delivered" onclick="handleAcceptClick(this)"  name="{{item.id}}" ><i class="fa fa-check" aria-hidden="true" data-toggle="modal" data-target="#acceptModal">Accept</i></button></a>
+
+           <div class="modal fade" id="acceptModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Accept Order</h4>
+        </div>
+        <div class="modal-body">
+          <h2><center>Do you Wish to accept the Order ?</center></h2>
+        </div>
+  
+        <div class="modal-footer">
+        <center>
+        <button type="button" style="color: white;background-color: red;    font-size: 30px;" class="btn btn-default" data-dismiss="modal">No</button>
+          <a id="accept-target-link" href="#"><button type="button" style="color: white;background-color: green;     font-size: 30px;" class="btn btn-default" >Yes</button></a></center>
+        </div>
+       
+
+      </div>
+      
+    </div>
+  </div>
 
          {% endif %}
         {% endif %}
         {% if item.being_delivered == False %}
         {% if item.order_placed == True %}
-        <span class="badge btn-success btn-sm" style="font-size:1.0em;">Accepted</span><div></div><br>
+        <span class="badge btn-success btn-sm" style="font-size:1.3em;">Accepted</span><div></div><br>
 
-         <a href={% url "core:delivered_order" item.id %}><button class="delivered"><i class="fa fa-check" aria-hidden="true">Delivered</i></button></a><br>
+                   <button class="delivered" data-toggle="modal" data-target="#deliverModal" onclick="handleDeliverClick(this)"  name="{{item.id}}" ><i class="fa fa-check" aria-hidden="true">Delivered</i></button></a><br>
+
+           <!-- Modal -->
+  <div class="modal fade" id="deliverModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Order Delivered</h4>
+        </div>
+        <div class="modal-body">
+          <h2><center>Is the order successfully Delivered to the customer ?</center></h2>
+        </div>
+  
+        <div class="modal-footer">
+        <center>
+        <button type="button" style="color: white;background-color: red;    font-size: 30px;" class="btn btn-default" data-dismiss="modal">No</button>
+          <a id="deliver-target-link" href="#"><button type="button" style="color: white;background-color: green;     font-size: 30px;" class="btn btn-default" >Yes</button></a></center>
+        </div>
+       
+
+      </div>
+      
+    </div>
+  </div>
+
         {% endif %}
         {% endif %}
         {% if item.order_rejected == False %}
         {% if item.order_placed == False %}
 
-        <a href={% url "core:decline_order" item.id %}><button class="cancle"><i class="fa fa-times" aria-hidden="true">Cancel</i></button></a>
+        <button class="cancle" data-toggle="modal" data-target="#deleteModal" onclick="handleDeleteClick(this)"  name="{{item.id}}"><i class="fa fa-times" aria-hidden="true">Cancel</i></button></a>
+
+           <!-- Modal -->
+  <div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Cancel Order.</h4>
+        </div>
+        <div class="modal-body">
+          <h2><center>Do you wish to cancel the order ?</center></h2>
+        </div>
+  
+        <div class="modal-footer">
+        <center>
+          <form action="decline-order/" method="POST">
+          {% csrf_token %}
+          <textarea required="" name="msg" rows="4" cols="25" placeholder="Reason For Cancelling the Order......"></textarea><br>
+          <input id="delete-target-link" type="text"name="data" style="display: none;"value="#"></input>
+          <button type="button" style="color: white;background-color: red;    font-size: 30px;" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="submit" style="color: white;background-color: green;     font-size: 30px;" class="btn btn-default" >Yes</button>
+        </form>
+      </center>
+        </div>
+       
+
+      </div>
+      
+    </div>
+  </div>
 
         {% endif %}
         {% endif %}
-        {% if item.being_delivered == True %}<span class="badge btn-success btn-sm" style="font-size:1.0em;">Completed</span>{% endif %}
-        {% if item.order_rejected == True %} <span class="badge btn-danger btn-lg" style="font-size:1.0em;">Canceled</span>{% endif %}
+        {% if item.being_delivered == True %}<span class="badge btn-success btn-sm" style="font-size:1.3em;">Completed</span>{% endif %}
+        {% if item.order_rejected == True %} <span class="badge btn-danger btn-lg" style="font-size:1.3em;background-color: red;">Cancelled</span>{% endif %}
       </td>
       <td data-label="Reason">
         {% if item.seller_msg %}<p>Your Previous Message: </p><div style="text-align: right; margin-bottom: 10px;"><label class="badge  badge-info">{{item.seller_msg}}</label></div>{% endif %}
         <form action={% url "shop:addmsg" item.id %} method="POST">
           {% csrf_token %}
-          <textarea name="msg" rows="4" cols="10" placeholder="Message for The Customer..."></textarea><br>
-          <input type="submit" value="Submit">
+          <textarea name="msg" rows="4" cols="15" placeholder="Reason to be entered incase of Late Delivery ..."></textarea><br>
+          <input type="submit" style="background-color: #4cae4c; color: white;" value="Submit">
         </form>
       </td>
     </tr>
@@ -467,8 +675,8 @@ display: block;
   </tbody>
 </table>
 
-<nav aria-label="Page navigation" >
-  <ul class="pagination" style="margin-left: 50%;transform: translate(-50%); color:#FF405E;">
+<nav aria-label="Page navigation" style="margin-bottom: 200px;" >
+  <ul class="pagination" style="color:#FF405E;">
     {% if orders.has_previous %}
        <li> <a class="page-item pagination-action" href="?page=1" tabindex="-1" id="myTab">
             <i class="fa fa-angle-double-left" aria-hidden="true"></i> </a></li>
@@ -515,24 +723,24 @@ html,body{
   <div class="row" style="padding-top: 20px;">
     
   
-    <div class="col-lg-4 col-sm-12 text-center" style="color: white;margin-bottom: 20px;">
-         <a href="/#" class="mx-1">
+       <div class="col-lg-4 col-sm-12 text-center" style="color: white;margin-bottom: 20px;">
+         <a href="https://twitter.com/TheDesire_2020" class="mx-1">
 
             <i style="font-size: 16px;  color: white;  border: 2px solid white;  border-radius: 50%;  padding: 5px;" class="fa fa-twitter social"></i>
          </a>
-         <a href="/#" class="w-6 mx-1">
+         <a href="https://www.instagram.com/thedesire2021/" class="w-6 mx-1">
 
             <i class="fa fa-instagram social"></i>
          </a>
-         <a href="/#" class="w-6 mx-1">
+         <a href="https://www.youtube.com/channel/UCCUqJYvh_khP5d3_FB84vXA/?guided_help_flow=5" class="w-6 mx-1">
      
             <i class="fa fa-youtube-play social"></i>
          </a>
-         <a href="/#" class="w-6 mx-1">
+         <a href="https://www.linkedin.com/in/the-desire-3aa8721ba/" class="w-6 mx-1">
            
             <i class="fa fa-linkedin social"></i>
          </a>
-         <a href="/#" class="w-6 mx-1">
+         <a class="w-6 mx-1">
           
             <i style="padding: 5px 8px;" class="fa fa-facebook social"></i>
          </a>
@@ -542,7 +750,18 @@ html,body{
     </div>
   </div>
 </footer>
-
+<script type="text/javascript">
+  function handleDeleteClick(e) {
+    document.getElementById("delete-target-link").value=e.name;
+  }
+  function handleAcceptClick(e) {
+    document.getElementById("accept-target-link").href="/accept-order/"+e.name+"/";
+  }
+  function handleDeliverClick(e) {
+    console.log(e.name);
+    document.getElementById("deliver-target-link").href="/delivered-order/"+e.name+"/";
+  }
+</script>
 <script src="{% static 'jquery-3.5.1.js' %}"></script>
     <script src="{% static 'ECART.js' %}"></script>
 

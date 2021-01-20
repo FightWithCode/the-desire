@@ -157,7 +157,7 @@
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="display: inherit;">
                         <span aria-hidden="true">&times;</span>
                       </button>
-                      {{ message }}
+                      <center>{{ message }}</center>
                     </div>
                     {% endfor %}
                 {% endif %}
@@ -198,7 +198,7 @@
   <form action={% url "shop:testimonials" %} method="post" class="col-lg-6 col-sm-12" style="box-shadow: 0px 0px 10px 6px #cecbd2;padding: 60px 0px;">{% csrf_token %}
     <div class="form-group col-lg-10 col-sm-12">
       <label for="name" style="font-size: 20px;font-weight: bold;float: left;">Name:</label>
-      <input type="text" style="font-size: 20px;" class="form-control" id="name" placeholder="Enter email" name="email">
+      <input type="text" style="font-size: 20px;" class="form-control" id="name" placeholder="Enter email" name="email" required="text">
     </div>
 
     <div class="form-group col-lg-10 col-sm-12" style="text-align: left;">
@@ -211,7 +211,7 @@
 
     <div class="form-group col-lg-10 col-sm-12">
       <label for="occ" style="font-size: 20px;font-weight: bold;float: left;">Testimoials:</label>
-      <textarea type="password" style="font-size: 20px;" class="form-control" id="occ" placeholder="Enter Testimoials" name="testimonial"></textarea>
+      <textarea type="password" style="font-size: 20px;" class="form-control" id="occ" placeholder="Enter Testimoials" name="testimonial" required="text"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary login col-lg-8 col-sm-10" style="font-size: 20px;">Post</button>

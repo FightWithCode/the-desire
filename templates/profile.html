@@ -97,6 +97,27 @@
     border-radius: .25rem;
     padding: 10px;
 }
+     html{
+  position:relative; 
+  min-height: 100%;
+}
+html,body{
+  margin:0;
+  padding:0;
+}
+
+#footer{
+   background-color: #100f15;
+   /*position: absolute;*/
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   left: 0;
+   right: 0;
+   overflow-x: hidden; 
+}
 
 </style>
 
@@ -151,7 +172,8 @@
 
 
 
-    <div class="main-content">
+    <div class="main-content" style="
+    margin-bottom: 100px;">
         <!-- Parte izquierda del cv -->
         <aside class="main-content__left">
             <figure class="user-profile">
@@ -420,7 +442,7 @@
                 </section>
             </div>
 
-            <div class="tab-content-4">
+           <!--  <div class="tab-content-4">
                 <section class="portfolio">
                     <h3>Portfolio</h3>
                     <p>
@@ -499,7 +521,7 @@
             </div>
         </main>
     </div>
-
+ -->
     <script>
         
         function currentTab(e) {
@@ -512,7 +534,41 @@
 
     </script>
 
-{% include 'footer.html' %}
+<footer class="" id="footer" style="">
+  <div class="row" style="padding-top: 20px;">
+    
+  
+       <div class="col-lg-4 col-sm-12 text-center" style="color: white;margin-bottom: 20px;">
+         <a href="https://twitter.com/TheDesire_2020" class="mx-1">
+
+            <i style="font-size: 16px;  color: white;  border: 2px solid white;  border-radius: 50%;  padding: 5px;" class="fa fa-twitter social"></i>
+         </a>
+         <a href="https://www.instagram.com/thedesire2021/" class="w-6 mx-1">
+
+            <i class="fa fa-instagram social"></i>
+         </a>
+         <a href="https://www.youtube.com/channel/UCCUqJYvh_khP5d3_FB84vXA/?guided_help_flow=5" class="w-6 mx-1">
+     
+            <i class="fa fa-youtube-play social"></i>
+         </a>
+         <a href="https://www.linkedin.com/in/the-desire-3aa8721ba/" class="w-6 mx-1">
+           
+            <i class="fa fa-linkedin social"></i>
+         </a>
+         <a class="w-6 mx-1">
+          
+            <i style="padding: 5px 8px;" class="fa fa-facebook social"></i>
+         </a>
+      </div>
+      <div class="col-lg-5 col-sm-12 text-center">
+    <p class="text-secondary">Copyright&#9400; 2020 The Desire is Proudly Developed By <a href="http://www.vyounic.com" style="color: #fe4a55;">VYounic</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'jquery-3.5.1.js' %}"></script>
+    <script src="{% static 'ECART.js' %}"></script>
+
 <!-- <style type="text/css">
 
 #footer{

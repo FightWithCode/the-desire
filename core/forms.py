@@ -8,7 +8,7 @@ from tinymce.widgets import TinyMCE
 PAYMENT_CHOICES = (
     #('InstaMojo', 'InstaMojo'),
     ('RazorPay', 'Online(Debit/Credit Cards, All Wallets, BHIM UPI)'),
-    ('COD', 'COD')
+    #('COD', 'COD')
 )
 
 
